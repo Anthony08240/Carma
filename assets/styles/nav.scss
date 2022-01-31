@@ -1,0 +1,38 @@
+.navbar{
+    position: absolute !important;
+    z-index: 100000;
+    background-color: transparent;
+    height: 4em;
+  }
+  
+  .burger{
+    background-color: #777572;
+    height: 50px !important;
+    width: 50px !important;
+    margin-left: 10px;
+    border-radius: 20%;
+    border: 1px solid black;
+    padding: 0;
+    text-align: center;
+  }
+
+  .burger-menu{
+    font-size: 50px;
+    display:contents;
+    vertical-align: middle;
+    float: none;
+  }
+
+  .dropdown-menu{
+    font-size: 30px;
+    background-color: #6E6E6E;
+    opacity: 0.9;
+    border: none;
+    color: white !important;
+  }
+
+  .logo{
+    height: 50px;
+    width: auto;
+    border-radius: 10px;
+  }

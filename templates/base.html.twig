@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-light w-100">
+        <div class="w-100" id="navbarNavDropdown">
+            <ul class="navbar-nav d-flex flex-row justify-content-between">
+                <li class="nav-item dropdown">
+                    <button class="burger btn" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-list burger-menu"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% if is_granted('ROLE_USER') %}
+                            <li><a class="dropdown-item text-white" href="{{ path('app_logout') }}">Déconnexion</a></li>
+                            <li><a class="dropdown-item text-white" href="{{ path('crud_user_edit', {'id' : app.user.id }) }}">Mon Compte</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item text-white" href="{{ path('app_register') }}">Inscription</a></li>
+                            <li><a class="dropdown-item text-white" href="{{ path('app_login') }}">Connexion</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{{ path('home') }}"><img class="logo" src="{{ asset('build/img/logo-carma.jpg') }}"  alt="logo carma"></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% block body %}{% endblock %}
+</body>
+
+</html>

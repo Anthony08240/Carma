@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+        {{ form_row(form.etablissement, { attr: { 'label': 'Submit me', 'class': 'input w-75 mx-auto' }} ) }}
+        {{ form_row(form.name, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(form.firstname, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(form.dnaissance, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(form.email, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(form.tel, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(form.plainPassword, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        <button type="submit" class="btn btn-form mb-4">Modifier</button>
+    {{ form_end(form) }}
