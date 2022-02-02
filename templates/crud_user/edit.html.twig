@@ -8,9 +8,12 @@
 
         <h1 class="h1 mb-3">Modifier</h1>
 
+
         {{ include('crud_user/_form.html.twig', {'button_label': 'Update'}) }}
 
         <a class="btn btn-form mb-4 bg-primary" href="{{ path('home') }}">Retour</a>
+
+        <a class="btn btn-form mb-4 bg-primary" href="{{ path('crud_point_index') }}">Voire mes points</a>
 
     </div>
 </div>

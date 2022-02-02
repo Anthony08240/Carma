@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -21,7 +22,7 @@ class UserType extends AbstractType
             ->add('name')
             ->add('firstname')
             ->add('tel')
-            ->add('dnaissance')
+            ->add('dnaissance', BirthdayType::class)
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne sont pas identique',

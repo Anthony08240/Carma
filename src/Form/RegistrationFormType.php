@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('dnaissance', DateType::class,[
+            ->add('dnaissance', BirthdayType::class,[
                 'label' => 'Date de Naissance',
                 'constraints' => [
                     new NotBlank([

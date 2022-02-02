@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Point{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form col-8 col-lg-4 p-4">
+
+    <h1 class="h1 mb-3">Modifier</h1>
+
+    {{ include('crud_point/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a class="btn btn-form mb-4 bg-primary" href="{{ path('crud_point_index') }}">Retour</a>
+    </div>
+</div>
+{% endblock %}

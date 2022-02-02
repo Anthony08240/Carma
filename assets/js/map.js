@@ -2,6 +2,11 @@
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
+var data =  document.getElementById("map")
+
+var points = JSON.parse(data.dataset.point)
+
+
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('../images/marker-icon-2x.png'),
     iconUrl: require('../images/marker-icon.png'),
@@ -97,51 +102,80 @@ if ($('#map').length != 0) {
         style: 'normal'
     }).addTo(map);
 
-    // marker blue
+    points.filter(function (entry){
+    
+        if(entry.categorie == 'Santé'){
+            
+            // marker blue
+        
+            var marker = L.marker([entry.point.latitude, entry.point.longitude]).addTo(map);
+        
+            marker.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            
+        }
+        if(entry.categorie == 'Centre sociaux'){
+            
+            // marker red
+        
+            var markerRed = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: redIcon
+            }).addTo(map);
 
-    var marker = L.marker([49.774776, 4.719757]).addTo(map);
+            markerRed.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
 
-    marker.bindPopup("<b>Place ducal</b><br>blue marker");
+        }
+        if(entry.categorie == 'Hébergement'){
 
-    // marker red
+            // marker green
+        
+            var markerGreen = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: greenIcon
+            }).addTo(map);
+        
+            markerGreen.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            
+        }
+        if(entry.categorie == 'Hygiène'){
+            
+            // marker blu light
+        
+            var markerBlueLight = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: bluelightIcon
+            }).addTo(map);
+        
+            markerBlueLight.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
 
-    var markerRed = L.marker([49.772039, 4.721973], {
-        icon: redIcon
-    }).addTo(map);
+        }
+        if(entry.categorie == 'Matériel'){
 
-    markerRed.bindPopup("<b>Place ducal</b><br>red marker");
+            // marker grey
+        
+            var markerGrey = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: greyIcon
+            }).addTo(map);
+        
+            markerGrey.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
 
-    // marker green
+        }
+        if(entry.categorie == 'Alimentaire'){
 
-    var markerGreen = L.marker([49.773375, 4.721596], {
-        icon: greenIcon
-    }).addTo(map);
+            // marker yelow
+        
+            var markerYelow = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: yelowIcon
+            }).addTo(map);
+        
+            markerYelow.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
 
-    markerGreen.bindPopup("<b>Place ducal</b><br>green marker");
+        }
+    
+    })
 
-    // marker green
 
-    var markerGrey = L.marker([49.772898, 4.717535], {
-        icon: greyIcon
-    }).addTo(map);
 
-    markerGrey.bindPopup("<b>Place ducal</b><br>grey marker");
 
-    // marker green
 
-    var markerBlueLight = L.marker([49.773225, 4.715222], {
-        icon: bluelightIcon
-    }).addTo(map);
 
-    markerBlueLight.bindPopup("<b>Place ducal</b><br>blue light marker");
-
-    // marker green
-
-    var markerYelow = L.marker([49.774702, 4.723866], {
-        icon: yelowIcon
-    }).addTo(map);
-
-    markerYelow.bindPopup("<b>Place ducal</b><br>yelow marker");
 
 
 
@@ -199,6 +233,33 @@ if ($('#map').length != 0) {
         })
     }
 }
+
+// filter point
+
+$('.js-point-color').click(function(e) {
+
+    var isPoint = $(this).attr('data-is-point');
+
+    
+    if (isPoint == "alimentaire"){
+        var markerYelow = L.marker([49.774702, 4.723866], {
+            icon: yelowIcon
+        }).addTo(map);
+        
+        markerYelow.bindPopup("<b>Place ducal</b><br>yelow marker");
+    }
+    if (isPoint == "centresociaux"){
+        var markerRed = L.marker([49.772039, 4.721973], {
+            icon: redIcon
+        }).addTo(map);
+        
+        markerRed.bindPopup("<b>Place ducal</b><br>red marker");
+    }
+    
+    e.preventDefault();
+            
+    jQuery.removeattr( a, "js-point-color" );
+});
 
 // function ajoutpoint(form) {
 

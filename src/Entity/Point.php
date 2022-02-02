@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PointRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PointRepository::class)
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Point
 {
     /**
+     * @Groups("map")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -18,11 +20,13 @@ class Point
     private $id;
 
     /**
+     * @Groups("map")
      * @ORM\Column(type="string", length=255)
      */
     private $categorie;
 
     /**
+     * @Groups("map")
      * @ORM\Column(type="string", length=255)
      */
     private $description;
@@ -33,6 +37,7 @@ class Point
     private $id_user;
 
     /**
+     * @Groups("map")
      * @ORM\Column(type="json")
      */
     private $point = [];
