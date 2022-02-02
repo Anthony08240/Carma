@@ -32,25 +32,32 @@
             <i class="bi bi-funnel-fill filtre-icon"></i>
         </button>
         <ul class="dropdown-menu">
+        <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
+                    data-is-point="{{ 'Tous' }}"
+                    >Tous</a></li>
             <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
-                    data-is-point="{{ 'alimentaire' }}"
+                    data-is-point="{{ 'Alimentaire' }}"
                     >Alimentaire<img class="marker-filtre" src="{{ asset('build/img/marker-icon-yelow.png') }}"
                         alt="marker alimentaire"></a></li>
             <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
-                    data-is-point="{{ 'centresociaux' }}"
+                    data-is-point="{{ 'Centre sociaux' }}"
                     >Centre sociaux<img class="marker-filtre" src="{{ asset('build/img/marker-icon-red.png') }}"
                         alt="marker centre sociaux"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center"
-                    href="#">Hébergement<img class="marker-filtre" src="{{ asset('build/img/marker-icon-green.png') }}"
+            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
+                    data-is-point="{{ 'Hébergement' }}"
+                    >Hébergement<img class="marker-filtre" src="{{ asset('build/img/marker-icon-green.png') }}"
                         alt="marker hébergement"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center"
-                    href="#">Hygiène<img class="marker-filtre" src="{{ asset('build/img/marker-icon-blue-light.png') }}"
+            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
+                    data-is-point="{{ 'Hygiène' }}"
+                    >Hygiène<img class="marker-filtre" src="{{ asset('build/img/marker-icon-blue-light.png') }}"
                         alt="marker hygiène"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center"
-                    href="#">Santé<img class="marker-filtre" src="{{ asset('build/img/marker-icon.png') }}"
+            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
+                    data-is-point="{{ 'Santé' }}"
+                    >Santé<img class="marker-filtre" src="{{ asset('build/img/marker-icon.png') }}"
                         alt="marker santé"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center"
-                    href="#">Matériel<img class="marker-filtre" src="{{ asset('build/img/marker-icon-grey.png') }}"
+            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
+                    data-is-point="{{ 'Matériel' }}"
+                    >Matériel<img class="marker-filtre" src="{{ asset('build/img/marker-icon-grey.png') }}"
                         alt="marker matériel"></a></li>
         </ul>
 

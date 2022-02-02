@@ -103,14 +103,26 @@ if ($('#map').length != 0) {
     }).addTo(map);
 
     points.filter(function (entry){
+
+        $('.js-point-color').click(function(e) {
+
+            var isPoint = $(this).attr('data-is-point');
     
         if(entry.categorie == 'Santé'){
             
             // marker blue
         
-            var marker = L.marker([entry.point.latitude, entry.point.longitude]).addTo(map);
+            var marker = L.marker([entry.point.latitude, entry.point.longitude])
         
             marker.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+            if (isPoint == "Santé"){
+                marker.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                marker.addTo(map)
+            }
             
         }
         if(entry.categorie == 'Centre sociaux'){
@@ -119,9 +131,17 @@ if ($('#map').length != 0) {
         
             var markerRed = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: redIcon
-            }).addTo(map);
+            })
 
             markerRed.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+            if (isPoint == "Centre sociaux"){
+                markerRed.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                markerRed.addTo(map)
+            }
 
         }
         if(entry.categorie == 'Hébergement'){
@@ -130,9 +150,17 @@ if ($('#map').length != 0) {
         
             var markerGreen = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: greenIcon
-            }).addTo(map);
+            })
         
             markerGreen.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+            if (isPoint == "Hébergement"){
+                markerGreen.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                markerGreen.addTo(map)
+            }
             
         }
         if(entry.categorie == 'Hygiène'){
@@ -141,9 +169,17 @@ if ($('#map').length != 0) {
         
             var markerBlueLight = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: bluelightIcon
-            }).addTo(map);
+            })
         
             markerBlueLight.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+            if (isPoint == "Hygiène"){
+                markerBlueLight.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                markerBlueLight.addTo(map)
+            }
 
         }
         if(entry.categorie == 'Matériel'){
@@ -152,9 +188,17 @@ if ($('#map').length != 0) {
         
             var markerGrey = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: greyIcon
-            }).addTo(map);
+            })
         
             markerGrey.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+            if (isPoint == "Matériel"){
+                markerGrey.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                markerGrey.addTo(map)
+            }
 
         }
         if(entry.categorie == 'Alimentaire'){
@@ -163,12 +207,20 @@ if ($('#map').length != 0) {
         
             var markerYelow = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: yelowIcon
-            }).addTo(map);
+            })
         
             markerYelow.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
+            if (isPoint == "Alimentaire"){
+                markerYelow.addTo(map)
+            }
+
+            if (isPoint == "Tous"){
+                markerYelow.addTo(map)
+            }
+
         }
-    
+    })
     })
 
 
@@ -236,30 +288,30 @@ if ($('#map').length != 0) {
 
 // filter point
 
-$('.js-point-color').click(function(e) {
+// $('.js-point-color').click(function(e) {
 
-    var isPoint = $(this).attr('data-is-point');
+//     var isPoint = $(this).attr('data-is-point');
 
     
-    if (isPoint == "alimentaire"){
-        var markerYelow = L.marker([49.774702, 4.723866], {
-            icon: yelowIcon
-        }).addTo(map);
+//     if (isPoint == "alimentaire"){
+//         var markerYelow = L.marker([49.774702, 4.723866], {
+//             icon: yelowIcon
+//         }).addTo(map);
         
-        markerYelow.bindPopup("<b>Place ducal</b><br>yelow marker");
-    }
-    if (isPoint == "centresociaux"){
-        var markerRed = L.marker([49.772039, 4.721973], {
-            icon: redIcon
-        }).addTo(map);
+//         markerYelow.bindPopup("<b>Place ducal</b><br>yelow marker");
+//     }
+//     if (isPoint == "centresociaux"){
+//         var markerRed = L.marker([49.772039, 4.721973], {
+//             icon: redIcon
+//         }).addTo(map);
         
-        markerRed.bindPopup("<b>Place ducal</b><br>red marker");
-    }
+//         markerRed.bindPopup("<b>Place ducal</b><br>red marker");
+//     }
     
-    e.preventDefault();
+//     e.preventDefault();
             
-    jQuery.removeattr( a, "js-point-color" );
-});
+//     jQuery.removeattr( a, "js-point-color" );
+// });
 
 // function ajoutpoint(form) {
 
