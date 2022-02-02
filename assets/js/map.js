@@ -110,7 +110,7 @@ if ($('#map').length != 0) {
         
             var marker = L.marker([entry.point.latitude, entry.point.longitude]).addTo(map);
         
-            marker.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            marker.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
             
         }
         if(entry.categorie == 'Centre sociaux'){
@@ -121,7 +121,7 @@ if ($('#map').length != 0) {
                 icon: redIcon
             }).addTo(map);
 
-            markerRed.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            markerRed.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
         }
         if(entry.categorie == 'Hébergement'){
@@ -132,7 +132,7 @@ if ($('#map').length != 0) {
                 icon: greenIcon
             }).addTo(map);
         
-            markerGreen.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            markerGreen.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
             
         }
         if(entry.categorie == 'Hygiène'){
@@ -143,7 +143,7 @@ if ($('#map').length != 0) {
                 icon: bluelightIcon
             }).addTo(map);
         
-            markerBlueLight.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            markerBlueLight.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
         }
         if(entry.categorie == 'Matériel'){
@@ -154,7 +154,7 @@ if ($('#map').length != 0) {
                 icon: greyIcon
             }).addTo(map);
         
-            markerGrey.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            markerGrey.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
         }
         if(entry.categorie == 'Alimentaire'){
@@ -165,7 +165,7 @@ if ($('#map').length != 0) {
                 icon: yelowIcon
             }).addTo(map);
         
-            markerYelow.bindPopup(`<b>${entry.categorie}</b><br>${entry.description}`);
+            markerYelow.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
         }
     

@@ -32,6 +32,7 @@ class Point
     private $description;
 
     /**
+     * @Groups("map")
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="points")
      */
     private $id_user;
