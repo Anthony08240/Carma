@@ -60,8 +60,8 @@ var bluelightIcon = L.icon({
     popupAnchor: [8, -25]
 });
 
-var yelowIcon = L.icon({
-    iconUrl: require('../images/marker-icon-yelow.png'),
+var yellowIcon = L.icon({
+    iconUrl: require('../images/marker-icon-yellow.png'),
     shadowUrl: shadow,
 
     iconAnchor: [5, 32],
@@ -85,6 +85,7 @@ const mapOptions = {
     center: [49.773510, 4.721191],
     zoom: 16
 }
+
 if ($('#map').length != 0) {
 
     var map = new L.map("map", mapOptions);
@@ -106,6 +107,8 @@ if ($('#map').length != 0) {
 
         $('.js-point-color').click(function(e) {
 
+            // location.reload();
+           
             var isPoint = $(this).attr('data-is-point');
     
         if(entry.categorie == 'Santé'){
@@ -114,7 +117,7 @@ if ($('#map').length != 0) {
         
             var marker = L.marker([entry.point.latitude, entry.point.longitude])
         
-            marker.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+            marker.bindPopup( `<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
             if (isPoint == "Santé"){
                 marker.addTo(map)
@@ -165,7 +168,7 @@ if ($('#map').length != 0) {
         }
         if(entry.categorie == 'Hygiène'){
             
-            // marker blu light
+            // marker blue light
         
             var markerBlueLight = L.marker([entry.point.latitude, entry.point.longitude], {
                 icon: bluelightIcon
@@ -203,20 +206,20 @@ if ($('#map').length != 0) {
         }
         if(entry.categorie == 'Alimentaire'){
 
-            // marker yelow
+            // marker yellow
         
-            var markerYelow = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: yelowIcon
+            var markerYellow = L.marker([entry.point.latitude, entry.point.longitude], {
+                icon: yellowIcon
             })
         
-            markerYelow.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+            markerYellow.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
 
             if (isPoint == "Alimentaire"){
-                markerYelow.addTo(map)
+                markerYellow.addTo(map)
             }
 
             if (isPoint == "Tous"){
-                markerYelow.addTo(map)
+                markerYellow.addTo(map)
             }
 
         }
@@ -294,11 +297,11 @@ if ($('#map').length != 0) {
 
     
 //     if (isPoint == "alimentaire"){
-//         var markerYelow = L.marker([49.774702, 4.723866], {
-//             icon: yelowIcon
+//         var markerYellow = L.marker([49.774702, 4.723866], {
+//             icon: yellowIcon
 //         }).addTo(map);
         
-//         markerYelow.bindPopup("<b>Place ducal</b><br>yelow marker");
+//         markerYellow.bindPopup("<b>Place ducal</b><br>yellow marker");
 //     }
 //     if (isPoint == "centresociaux"){
 //         var markerRed = L.marker([49.772039, 4.721973], {
