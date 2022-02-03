@@ -2,7 +2,7 @@
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
-var data =  document.getElementById("map")
+var data = document.getElementById("map")
 
 var points = JSON.parse(data.dataset.point)
 
@@ -103,132 +103,70 @@ if ($('#map').length != 0) {
         style: 'normal'
     }).addTo(map);
 
-    points.filter(function (entry){
-
-        $('.js-point-color').click(function(e) {
-
-            // location.reload();
-           
-            var isPoint = $(this).attr('data-is-point');
-    
-        if(entry.categorie == 'Santé'){
-            
-            // marker blue
-        
-            var marker = L.marker([entry.point.latitude, entry.point.longitude])
-        
-            marker.bindPopup( `<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Santé"){
-                marker.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                marker.addTo(map)
-            }
-            
-        }
-        if(entry.categorie == 'Centre sociaux'){
-            
-            // marker red
-        
-            var markerRed = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: redIcon
-            })
-
-            markerRed.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Centre sociaux"){
-                markerRed.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                markerRed.addTo(map)
-            }
-
-        }
-        if(entry.categorie == 'Hébergement'){
-
-            // marker green
-        
-            var markerGreen = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: greenIcon
-            })
-        
-            markerGreen.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Hébergement"){
-                markerGreen.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                markerGreen.addTo(map)
-            }
-            
-        }
-        if(entry.categorie == 'Hygiène'){
-            
-            // marker blue light
-        
-            var markerBlueLight = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: bluelightIcon
-            })
-        
-            markerBlueLight.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Hygiène"){
-                markerBlueLight.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                markerBlueLight.addTo(map)
-            }
-
-        }
-        if(entry.categorie == 'Matériel'){
-
-            // marker grey
-        
-            var markerGrey = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: greyIcon
-            })
-        
-            markerGrey.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Matériel"){
-                markerGrey.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                markerGrey.addTo(map)
-            }
-
-        }
-        if(entry.categorie == 'Alimentaire'){
-
-            // marker yellow
-        
-            var markerYellow = L.marker([entry.point.latitude, entry.point.longitude], {
-                icon: yellowIcon
-            })
-        
-            markerYellow.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
-
-            if (isPoint == "Alimentaire"){
-                markerYellow.addTo(map)
-            }
-
-            if (isPoint == "Tous"){
-                markerYellow.addTo(map)
-            }
-
-        }
+    console.log(points);
+    const categories = points.map(point => point.categorie).filter(function (ele, pos) {
+        return points.map(point => point.categorie).indexOf(ele) == pos;
     })
+    console.log(categories);
+
+    const layerGroup = L.layerGroup()
+
+    const filteredPoints = []
+
+    categories.forEach(category => filteredPoints.push([]))
+
+    points.map(function (entry) {
+
+        // $('.js-point-color').on("click", function (e) {
+
+        // location.reload();
+
+        var category = $(this).attr('data-is-point');
+
+        var marker = L.marker([entry.point.latitude, entry.point.longitude])
+
+        switch (entry.categorie) {
+            case 'Centre sociaux':
+                marker.setIcon(redIcon)
+                break;
+            case 'Hébergement':
+                marker.setIcon(greenIcon)
+                break;
+            case 'Hygiène':
+                marker.setIcon(bluelightIcon)
+                break;
+            case 'Matériel':
+                marker.setIcon(greyIcon)
+                break;
+            case 'Alimentaire':
+                marker.setIcon(yellowIcon)
+                break;
+            default:
+                break;
+        }
+
+        marker.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+
+        filteredPoints[categories.indexOf(entry.categorie)] = [
+            ...filteredPoints[categories.indexOf(entry.categorie)],
+            marker
+        ]
+        // if (category == entry.categorie || category == "Tous") {
+        //     marker.addTo(map);
+        // }
+    })
+    // })
+    console.log(filteredPoints);
+
+    const layers = {}
+
+    categories.forEach((categorie, index) => {
+        layers[categorie] = filteredPoints[index]
     })
 
+    console.log(layers);
 
-
-
+    L.control.layers(layers).addTo(map);
 
 
 
@@ -274,16 +212,17 @@ if ($('#map').length != 0) {
     }
 
     const addPointsLinksWrapper = $('.boutton');
+
     if (addPointsLinksWrapper.length != 0) {
         console.log(addPointsLinksWrapper)
         addPointsLinksWrapper.on('click', '.js-add-point-links a', (e) => {
-            if(coordinates == null){
+            if (coordinates == null) {
                 return alert('Erreur lors de la géolocalisation vous ne pouvez pas jouter de point pour le moment, veuillez réessayer plus tard ou bien activer votre géolocalisation');
             }
             e.preventDefault()
             const href = e.target.getAttribute('href');
             const url = `${href}&latitude=${coordinates[0]}&longitude=${coordinates[1]}`;
-                
+
             window.location.href = url;
         })
     }
@@ -293,26 +232,26 @@ if ($('#map').length != 0) {
 
 // $('.js-point-color').click(function(e) {
 
-//     var isPoint = $(this).attr('data-is-point');
+//     var category = $(this).attr('data-is-point');
 
-    
-//     if (isPoint == "alimentaire"){
+
+//     if (category == "alimentaire"){
 //         var markerYellow = L.marker([49.774702, 4.723866], {
 //             icon: yellowIcon
 //         }).addTo(map);
-        
+
 //         markerYellow.bindPopup("<b>Place ducal</b><br>yellow marker");
 //     }
-//     if (isPoint == "centresociaux"){
+//     if (category == "centresociaux"){
 //         var markerRed = L.marker([49.772039, 4.721973], {
 //             icon: redIcon
 //         }).addTo(map);
-        
+
 //         markerRed.bindPopup("<b>Place ducal</b><br>red marker");
 //     }
-    
+
 //     e.preventDefault();
-            
+
 //     jQuery.removeattr( a, "js-point-color" );
 // });
 
