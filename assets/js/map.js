@@ -161,7 +161,7 @@ if ($('#map').length != 0) {
     const layers = {}
 
     categories.forEach((categorie, index) => {
-        layers[categorie] = filteredPoints[index]
+        layers[categorie] = L.layerGroup(filteredPoints[index])
     })
 
     console.log(layers);
