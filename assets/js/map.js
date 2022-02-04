@@ -109,19 +109,11 @@ if ($('#map').length != 0) {
     })
     console.log(categories);
 
-    const layerGroup = L.layerGroup()
-
     const filteredPoints = []
 
     categories.forEach(category => filteredPoints.push([]))
 
     points.map(function (entry) {
-
-        // $('.js-point-color').on("click", function (e) {
-
-        // location.reload();
-
-        var category = $(this).attr('data-is-point');
 
         var marker = L.marker([entry.point.latitude, entry.point.longitude])
 
@@ -155,19 +147,36 @@ if ($('#map').length != 0) {
         //     marker.addTo(map);
         // }
     })
-    // })
     console.log(filteredPoints);
 
     const layers = {}
 
     categories.forEach((categorie, index) => {
-        layers[categorie] = filteredPoints[index]
+        layers[categorie] = L.layerGroup(filteredPoints[index])
     })
 
     console.log(layers);
 
-    L.control.layers(layers).addTo(map);
+    // L.control.layers(layers).addTo(map);
 
+    $('.js-point-color').on("click", function (e) {
+
+        var category = $(this).attr('data-is-point');
+        categories.forEach((categorie, index) => {
+            layers[categorie].removeFrom(map);
+        })
+
+        if (category == "Tous") {
+            categories.forEach((categorie, index) => {
+                layers[categorie].addTo(map)
+            })
+        } else {
+            if (layers[category]) {
+             layers[category].addTo(map)
+            }
+        }
+
+    })
 
 
 
