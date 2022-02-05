@@ -76,3 +76,25 @@
     height: 30px;
     margin-left: 20px;
 }
+
+/* css to customize Leaflet default styles  */
+.popupCustom .leaflet-popup-tip,
+.popupCustom .leaflet-popup-content-wrapper {
+    background: whitesmoke;
+    color: black;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+.leaflet-popup {
+    top: -250px !important;
+}
+
+.modalPoint{
+    text-align: center;
+}
+.modalPoint p {
+    font-size: large;
+}

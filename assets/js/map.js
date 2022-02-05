@@ -137,15 +137,43 @@ if ($('#map').length != 0) {
                 break;
         }
 
-        marker.bindPopup(`<b>${entry.id_user.etablissement}</b><br>${entry.description}`);
+        //create popup contents
+        var customPopup = `
+        <div class="modalPoint">
+            <div>
+                <h1>${entry.id_user.etablissement}</h1>
+            </div>
+                <br/>
+            <div>
+                <p class="text-danger">${entry.categorie}</p>
+            </div>
+                <br/>
+            <div>
+                <p>${entry.description}</p>
+            </div>
+                <br/>
+            <div>
+                <p>${entry.id_user.tel}</p>
+            </div>
+        </div>
+        `;
+
+        //specify popup options 
+        var customOptions =
+            {
+            'className' : 'popupCustom',
+            }
+
+        function clickZoom(e) {
+            map.setView(e.target.getLatLng(), map.getZoom());
+        }
+
+        marker.bindPopup(customPopup, customOptions).on('click', clickZoom);
 
         filteredPoints[categories.indexOf(entry.categorie)] = [
             ...filteredPoints[categories.indexOf(entry.categorie)],
             marker
         ]
-        // if (category == entry.categorie || category == "Tous") {
-        //     marker.addTo(map);
-        // }
     })
     console.log(filteredPoints);
 
@@ -211,7 +239,7 @@ if ($('#map').length != 0) {
             icon: geolocationIcon
         }).addTo(map);
 
-        markerGeolocation.bindPopup("<b>Ma position</b>");
+        markerGeolocation.bindTooltip(`<b>Ma position</b>`, { direction : "top", offset	: L.point({x: 8, y: -34}) });
 
         console.log(position)
     }
