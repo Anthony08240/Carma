@@ -1,4 +1,3 @@
-// import 'leaflet';
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -159,10 +158,9 @@ if ($('#map').length != 0) {
         `;
 
         //specify popup options 
-        var customOptions =
-            {
-            'className' : 'popupCustom',
-            }
+        var customOptions = {
+            'className': 'popupCustom',
+        }
 
         function clickZoom(e) {
             map.setView(e.target.getLatLng(), map.getZoom());
@@ -185,7 +183,6 @@ if ($('#map').length != 0) {
 
     console.log(layers);
 
-    // L.control.layers(layers).addTo(map);
 
     $('.js-point-color').on("click", function (e) {
 
@@ -200,7 +197,7 @@ if ($('#map').length != 0) {
             })
         } else {
             if (layers[category]) {
-             layers[category].addTo(map)
+                layers[category].addTo(map)
             }
         }
 
@@ -239,7 +236,13 @@ if ($('#map').length != 0) {
             icon: geolocationIcon
         }).addTo(map);
 
-        markerGeolocation.bindTooltip(`<b>Ma position</b>`, { direction : "top", offset	: L.point({x: 8, y: -34}) });
+        markerGeolocation.bindTooltip(`<b>Ma position</b>`, {
+            direction: "top",
+            offset: L.point({
+                x: 8,
+                y: -34
+            })
+        });
 
         console.log(position)
     }
@@ -264,60 +267,3 @@ if ($('#map').length != 0) {
         })
     }
 }
-
-// filter point
-
-// $('.js-point-color').click(function(e) {
-
-//     var category = $(this).attr('data-is-point');
-
-
-//     if (category == "alimentaire"){
-//         var markerYellow = L.marker([49.774702, 4.723866], {
-//             icon: yellowIcon
-//         }).addTo(map);
-
-//         markerYellow.bindPopup("<b>Place ducal</b><br>yellow marker");
-//     }
-//     if (category == "centresociaux"){
-//         var markerRed = L.marker([49.772039, 4.721973], {
-//             icon: redIcon
-//         }).addTo(map);
-
-//         markerRed.bindPopup("<b>Place ducal</b><br>red marker");
-//     }
-
-//     e.preventDefault();
-
-//     jQuery.removeattr( a, "js-point-color" );
-// });
-
-// function ajoutpoint(form) {
-
-//     $.ajax({
-//         type: "POST",
-//         url: "/ajout-point",
-//         data: form.serialize(),
-//         data: {
-//             latitude: "data"
-//         },
-//         success: function () {
-//             console.log('Validé')
-//         },
-//     })
-
-// }
-
-// const newPointForm = $('#newPointForm');
-// if (newPointForm.length != 0) {
-
-//     console.log(newPointForm)
-//     newPointForm.on('submit', (e) => {
-//         console.log(e)
-//         e.preventDefault();
-
-//         const send = ajoutpoint(newPointForm);
-
-//         console.log(send)
-//     })
-// }
