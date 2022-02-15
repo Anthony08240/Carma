@@ -14,7 +14,8 @@
                 <th>Categorie</th>
                 <th>Description</th>
                 <th>Point</th>
-                <th>actions</th>
+                <th>Image</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,7 @@
                 <td>{{ point.categorie }}</td>
                 <td>{{ point.description }}</td>
                 <td>{{ point.point ? point.point|json_encode : '' }}</td>
+                <td><img class="img-fluid img-crud" src="../../img_upload/{{ point.img }}" alt="{{ point.img }}"></td>
                 <td>
                         {{ include('crud_point/_delete_form.html.twig') }}
                     <a class="btn mt-2 bg-primary text-white" href="{{ path('crud_point_edit', {'id': point.id}) }}">Modifier</a>

@@ -144,7 +144,7 @@ if ($('#map').length != 0) {
             </div>
                 <br/>
             <div>
-                <p class="text-danger">${entry.categorie}</p>
+            <img class="popup-img" src="../img_upload/${entry.img}" alt="">
             </div>
                 <br/>
             <div>
@@ -153,6 +153,9 @@ if ($('#map').length != 0) {
                 <br/>
             <div>
                 <p>${entry.id_user.tel}</p>
+            </div>
+            <div>
+                <a href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">y aller</a>
             </div>
         </div>
         `;
