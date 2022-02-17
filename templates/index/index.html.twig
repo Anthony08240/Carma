@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+<div class="index">
+    <div class="text-center">
+    <h1 class="mb-5">Accueil</h1>
+    <img class="logo-index img-fluid" src="{{ asset('build/img/logo-carma.jpg') }}"  alt="logo carma">
+    <br>
+    <a href="{{ path('home') }}" class="btn btn-primary mt-5">Carte</a>
+    </div>
+</div>
+{% endblock %}

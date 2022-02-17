@@ -17,12 +17,9 @@
             <i class="bi bi-plus ajout-plus"></i>
         </button>
         <ul class="dropdown-menu js-add-point-links">
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Alimentaire'}) }}">Alimentaire</a></li>
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Centre sociaux'}) }}">Centre sociaux</a></li>
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Hébergement'}) }}">Hébergement</a></li>
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Hygiène'}) }}">Hygiène</a></li>
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Santé'}) }}">Santé</a></li>
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': 'Matériel'}) }}">Matériel</a></li>
+        {% for category in categorys %}
+            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': category.category }) }}">{{ category.category }}</a></li>
+        {% endfor %}
         </ul>
         {% else %}
 
@@ -35,30 +32,12 @@
         <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
                     data-is-point="{{ 'Tous' }}"
                     >Tous</a></li>
+        {% for category in categorys %}
             <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
-                    data-is-point="{{ 'Alimentaire' }}"
-                    >Alimentaire<img class="marker-filtre" src="{{ asset('build/img/marker-icon-yellow.png') }}"
+                    data-is-point="{{ category.category }}"
+                    >{{ category.category }}<img class="marker-filtre" src="{{ asset('build/img/marker-icon-' ~ category.color ~ '.png') }}"
                         alt="marker alimentaire"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
-                    data-is-point="{{ 'Centre sociaux' }}"
-                    >Centre sociaux<img class="marker-filtre" src="{{ asset('build/img/marker-icon-red.png') }}"
-                        alt="marker centre sociaux"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
-                    data-is-point="{{ 'Hébergement' }}"
-                    >Hébergement<img class="marker-filtre" src="{{ asset('build/img/marker-icon-green.png') }}"
-                        alt="marker hébergement"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
-                    data-is-point="{{ 'Hygiène' }}"
-                    >Hygiène<img class="marker-filtre" src="{{ asset('build/img/marker-icon-blue-light.png') }}"
-                        alt="marker hygiène"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
-                    data-is-point="{{ 'Santé' }}"
-                    >Santé<img class="marker-filtre" src="{{ asset('build/img/marker-icon.png') }}"
-                        alt="marker santé"></a></li>
-            <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center  js-point-color"
-                    data-is-point="{{ 'Matériel' }}"
-                    >Matériel<img class="marker-filtre" src="{{ asset('build/img/marker-icon-grey.png') }}"
-                        alt="marker matériel"></a></li>
+        {% endfor %}
         </ul>
 
     </div>

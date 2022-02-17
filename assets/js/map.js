@@ -1,6 +1,35 @@
 import L from 'leaflet';
 delete L.Icon.Default.prototype._getIconUrl;
 
+
+var idleTime = 0;
+$(document).on("DOMContentLoaded", function () {
+    //Increment the idle time counter every minute.
+    var idleInterval = setInterval(timerIncrement, 60000);
+
+    //Zero the idle timer on mouse movement.
+    $(this).on("mousemove", function (e) {
+        idleTime = 0;
+    });
+    $(this).on("keypress", function (e) {
+        idleTime = 0;
+    });
+    //Zero the idle timer on touch events.
+    $(this).on('touchstart', function () {
+        idleTime = 0;
+    });
+    $(this).on('touchmove', function () {
+        idleTime = 0;
+    });
+});
+
+function timerIncrement() {
+    idleTime = idleTime + 1;
+    if (idleTime > 1) {
+        window.location.href = "../";
+    }
+}
+
 var data = document.getElementById("map")
 
 var points = JSON.parse(data.dataset.point)
@@ -102,11 +131,9 @@ if ($('#map').length != 0) {
         style: 'normal'
     }).addTo(map);
 
-    console.log(points);
     const categories = points.map(point => point.categorie).filter(function (ele, pos) {
         return points.map(point => point.categorie).indexOf(ele) == pos;
     })
-    console.log(categories);
 
     const filteredPoints = []
 
@@ -155,7 +182,7 @@ if ($('#map').length != 0) {
                 <p>${entry.id_user.tel}</p>
             </div>
             <div>
-                <a href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">y aller</a>
+                <a href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">Itinéraire</a>
             </div>
         </div>
         `;
@@ -176,15 +203,12 @@ if ($('#map').length != 0) {
             marker
         ]
     })
-    console.log(filteredPoints);
 
     const layers = {}
 
     categories.forEach((categorie, index) => {
         layers[categorie] = L.layerGroup(filteredPoints[index])
     })
-
-    console.log(layers);
 
 
     $('.js-point-color').on("click", function (e) {
@@ -246,8 +270,6 @@ if ($('#map').length != 0) {
                 y: -34
             })
         });
-
-        console.log(position)
     }
 
     function handleLocationError(msg) {
@@ -257,7 +279,6 @@ if ($('#map').length != 0) {
     const addPointsLinksWrapper = $('.boutton');
 
     if (addPointsLinksWrapper.length != 0) {
-        console.log(addPointsLinksWrapper)
         addPointsLinksWrapper.on('click', '.js-add-point-links a', (e) => {
             if (coordinates == null) {
                 return alert('Erreur lors de la géolocalisation vous ne pouvez pas jouter de point pour le moment, veuillez réessayer plus tard ou bien activer votre géolocalisation');

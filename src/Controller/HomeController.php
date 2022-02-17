@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
 use App\Repository\PointRepository;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +19,13 @@ class HomeController extends AbstractController
     
 
     /**
-     * @Route("/", name="home")
+     * @Route("/carte", name="home")
      */
-    public function index(PointRepository $pointRepository, SerializerInterface $serializer): Response
+    public function index(PointRepository $pointRepository, SerializerInterface $serializer, CategoryRepository $categoryRepository): Response
     {
 
         $data = $pointRepository->findAll();
+        $categorys = $categoryRepository->findAll(); 
 
         // $data = json_encode($points);
 
@@ -33,7 +35,8 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'points' => $points
+            'points' => $points,
+            'categorys' => $categorys
         ]);
     }
 }

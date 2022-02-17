@@ -49,6 +49,13 @@ class Point
      */
     private $img;
 
+    /**
+     * @Groups("map")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="points")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $id_category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +117,18 @@ class Point
     public function setImg(?string $img): self
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function getIdCategory(): ?Category
+    {
+        return $this->id_category;
+    }
+
+    public function setIdCategory(?Category $id_category): self
+    {
+        $this->id_category = $id_category;
 
         return $this;
     }
