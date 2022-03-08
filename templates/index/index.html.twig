@@ -4,11 +4,38 @@
 
 {% block body %}
 <div class="index">
-    <div class="text-center">
-    <h1 class="mb-5">Accueil</h1>
-    <img class="logo-index img-fluid" src="{{ asset('build/img/logo-carma.jpg') }}"  alt="logo carma">
-    <br>
-    <a href="{{ path('home') }}" class="btn btn-primary mt-5">Carte</a>
+    <div class="text-center row d-flex align-items-center section-1">
+        <div class="col-12 col-lg-8">
+            <img class="logo-index img-fluid" src="{{ asset('build/img/logo-carma.jpg') }}"  alt="logo carma">
+        </div>
+        <div class="col-12 col-lg-4 p-5">
+            <h2 class="text-white">BIENVENUE sur CARMA,</h2>
+            <p class="h5 text-white mt-4"> une application solidaire,<br>
+                pour que plus personne<br>
+                ne soit mis de côté !<br>
+                AIDER,<br>
+                SE FAIRE AIDER …
+            </p>
+            <p class="h5 mt-5">
+                POUR ACCEDER<br> 
+                AUX DIFFERENTS MENUS SELECTIONNE LA LOCALITE<br>
+                <a href="{{ path('home') }}" class="text-reset text-decoration-none mt-5">1-Charleville-Mézières</a><br>
+                2-
+            </p>
+        </div>
     </div>
 </div>
+    <div class="footer-home d-flex align-items-center justify-content-center">
+        <div class="img-footer col-2">
+            <img class="logo-footer img-fluid" src="{{ asset('build/img/science_factor.jpg') }}"  alt="logo carma">
+        </div>
+        <div class="text-footer col-8 text-white">
+        <p class="h5">
+            <strong>Qui sommes-nous?</strong><br>
+        </p><p class="h6">
+            Fort de leur succès au concours SCIENCE FACTOR, CARLA et MAE, ont conçu une plateforme d’entr’aide dans le domaine ADMINISTRATIF, ALIMENTAIRE, de l’HABILLEMENT, de l’HEBERGEMENT,…<br>
+            Chaque particulier ou professionnel pourrase montrer en faisant un don.
+        </p>
+        </div>
+    </div>
 {% endblock %}

@@ -24,13 +24,10 @@ class PointController extends AbstractController
         $point = new Point();
         
         $geoloc = $request->query->all();
-        array_splice($geoloc, 0, 1);
+        $location = array_splice($geoloc, 0);
 
         
-        $category = $request->query->get('cat');
-
-        $point->setCategorie($category);
-        $point->setPoint($geoloc);
+        $point->setPoint($location);
         $point->setIdUser($this->getUser());
         
         $form = $this->createForm(PointType::class, $point);

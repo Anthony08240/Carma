@@ -23,12 +23,6 @@ class Point
      * @Groups("map")
      * @ORM\Column(type="string", length=255)
      */
-    private $categorie;
-
-    /**
-     * @Groups("map")
-     * @ORM\Column(type="string", length=255)
-     */
     private $description;
 
     /**
@@ -56,21 +50,15 @@ class Point
      */
     private $id_category;
 
+    /**
+     * @Groups("map")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $horaire;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCategorie(): ?string
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(string $categorie): self
-    {
-        $this->categorie = $categorie;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -129,6 +117,18 @@ class Point
     public function setIdCategory(?Category $id_category): self
     {
         $this->id_category = $id_category;
+
+        return $this;
+    }
+
+    public function getHoraire(): ?string
+    {
+        return $this->horaire;
+    }
+
+    public function setHoraire(string $horaire): self
+    {
+        $this->horaire = $horaire;
 
         return $this;
     }

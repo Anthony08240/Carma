@@ -3,9 +3,13 @@
 {% block title %}New Category{% endblock %}
 
 {% block body %}
-    <h1>Create new Category</h1>
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+    <h1>Ajouter une catégorie</h1>
 
     {{ include('admin_category/_form.html.twig') }}
 
-    <a href="{{ path('admin_category_index') }}">back to list</a>
+    <a class="btn btn-form mb-4 bg-primary" href="{{ path('admin_category_index') }}">Retour</a>
+    </div>
+</div>
 {% endblock %}

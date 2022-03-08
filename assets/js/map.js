@@ -32,8 +32,6 @@ function timerIncrement() {
 
 var data = document.getElementById("map")
 
-var points = JSON.parse(data.dataset.point)
-
 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('../images/marker-icon-2x.png'),
@@ -43,6 +41,17 @@ L.Icon.Default.mergeOptions({
 
 
 const shadow = require('../images/marker-shadow.png');
+
+// blue marker
+
+var blueIcon = L.icon({
+    iconUrl: require('../images/marker-icon-blue.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
 
 // red marker
 
@@ -88,6 +97,8 @@ var bluelightIcon = L.icon({
     popupAnchor: [8, -25]
 });
 
+// yellow marker
+
 var yellowIcon = L.icon({
     iconUrl: require('../images/marker-icon-yellow.png'),
     shadowUrl: shadow,
@@ -96,6 +107,74 @@ var yellowIcon = L.icon({
     shadowAnchor: [4, 32],
     popupAnchor: [8, -25]
 });
+
+// black marker
+
+var blackIcon = L.icon({
+    iconUrl: require('../images/marker-icon-black.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// dark green marker
+
+var darkgreenIcon = L.icon({
+    iconUrl: require('../images/marker-icon-dark-green.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// orange marker
+
+var orangeIcon = L.icon({
+    iconUrl: require('../images/marker-icon-orange.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// pink marker
+
+var pinkIcon = L.icon({
+    iconUrl: require('../images/marker-icon-pink.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// purple marker
+
+var purpleIcon = L.icon({
+    iconUrl: require('../images/marker-icon-purple.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// event marker
+
+var eventIcon = L.icon({
+    iconUrl: require('../images/marker-icon-event.png'),
+    shadowUrl: shadow,
+
+    iconAnchor: [5, 32],
+    shadowAnchor: [4, 32],
+    popupAnchor: [8, -25]
+});
+
+// geolocation marker
 
 var geolocationIcon = L.icon({
     iconUrl: require('../images/marker-geolocation.png'),
@@ -116,6 +195,8 @@ const mapOptions = {
 
 if ($('#map').length != 0) {
 
+    var points = JSON.parse(data.dataset.point)
+
     var map = new L.map("map", mapOptions);
     var coordinates;
 
@@ -131,9 +212,11 @@ if ($('#map').length != 0) {
         style: 'normal'
     }).addTo(map);
 
-    const categories = points.map(point => point.categorie).filter(function (ele, pos) {
-        return points.map(point => point.categorie).indexOf(ele) == pos;
+    // Créer un tableau de catégories à partir des points
+    const categories = points.map(point => point.id_category.color).filter(function (ele, pos) {
+        return points.map(point => point.id_category.color).indexOf(ele) == pos;
     })
+
 
     const filteredPoints = []
 
@@ -143,43 +226,82 @@ if ($('#map').length != 0) {
 
         var marker = L.marker([entry.point.latitude, entry.point.longitude])
 
-        switch (entry.categorie) {
-            case 'Centre sociaux':
+        switch (entry.id_category.color) {
+            case 'red':
                 marker.setIcon(redIcon)
                 break;
-            case 'Hébergement':
+            case 'green':
                 marker.setIcon(greenIcon)
                 break;
-            case 'Hygiène':
+            case 'blue-light':
                 marker.setIcon(bluelightIcon)
                 break;
-            case 'Matériel':
+            case 'grey':
                 marker.setIcon(greyIcon)
                 break;
-            case 'Alimentaire':
+            case 'yellow':
                 marker.setIcon(yellowIcon)
+                break;
+            case 'blue':
+                marker.setIcon(blueIcon)
+                break;
+            case 'black':
+                marker.setIcon(blackIcon)
+                break;
+            case 'darkgreen':
+                marker.setIcon(darkgreenIcon)
+                break;
+            case 'orange':
+                marker.setIcon(orangeIcon)
+                break;
+            case 'pink':
+                marker.setIcon(pinkIcon)
+                break;
+            case 'purple':
+                marker.setIcon(purpleIcon)
+                break;
+            case 'event':
+                marker.setIcon(eventIcon)
                 break;
             default:
                 break;
         }
-
+console.log(entry);
         //create popup contents
         var customPopup = `
         <div class="modalPoint">
-            <div>
-                <h1>${entry.id_user.etablissement}</h1>
+            <div class="head-popup">
+                <h1 class="text-white ms-5">${entry.id_user.etablissement}</h1>
             </div>
-                <br/>
-            <div>
-            <img class="popup-img" src="../img_upload/${entry.img}" alt="">
+            <div class="popup_sectio1 row text-white">
+                <div class="popup_section11 col-6">
+                    <div>
+                        <p><strong><span class="underline">Adresse</span></strong>: ${entry.id_user.adresse}</p>
+                    </div>
+                        <br/>
+                    <div>
+                        <p><strong><span class="underline">Type d'aide</span></strong>: ${entry.id_category.category}</p>
+                    </div>
+                </div>
+                `
+
+        if (entry.img) {
+            customPopup += `
+                <div class="col-6 text-center">
+                    <img class="popup-img" src="../img_upload/${entry.img}" alt="${entry.img}">
+                </div>
             </div>
-                <br/>
-            <div>
-                <p>${entry.description}</p>
+            `
+        }
+        customPopup += `
+            <div class="col-10 text-white">
+                <p><strong><span class="underline">Descriptif de l’aide </span></strong>: ${entry.description}</p>
             </div>
-                <br/>
-            <div>
-                <p>${entry.id_user.tel}</p>
+            <div class="col-10 text-white">
+                <p><strong><span class="underline">Heures d’ouverture </span></strong>: ${entry.horaire}</p>
+            </div>
+            <div class="col-10 text-white">
+                <p><strong><span class="underline">Téléphone </span></strong>: ${entry.id_user.tel}</p>
             </div>
             <div>
                 <a href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">Itinéraire</a>
@@ -198,8 +320,8 @@ if ($('#map').length != 0) {
 
         marker.bindPopup(customPopup, customOptions).on('click', clickZoom);
 
-        filteredPoints[categories.indexOf(entry.categorie)] = [
-            ...filteredPoints[categories.indexOf(entry.categorie)],
+        filteredPoints[categories.indexOf(entry.id_category.color)] = [
+            ...filteredPoints[categories.indexOf(entry.id_category.color)],
             marker
         ]
     })
@@ -276,16 +398,17 @@ if ($('#map').length != 0) {
         alert("Erreur lors de la géolocalisation");
     }
 
+    // ajout localisation sur un point
+
     const addPointsLinksWrapper = $('.boutton');
 
     if (addPointsLinksWrapper.length != 0) {
-        addPointsLinksWrapper.on('click', '.js-add-point-links a', (e) => {
+        addPointsLinksWrapper.on('click', '.bouton-ajout', (e) => {
             if (coordinates == null) {
                 return alert('Erreur lors de la géolocalisation vous ne pouvez pas jouter de point pour le moment, veuillez réessayer plus tard ou bien activer votre géolocalisation');
             }
             e.preventDefault()
-            const href = e.target.getAttribute('href');
-            const url = `${href}&latitude=${coordinates[0]}&longitude=${coordinates[1]}`;
+            const url = `/ajout-point?latitude=${coordinates[0]}&longitude=${coordinates[1]}`;
 
             window.location.href = url;
         })

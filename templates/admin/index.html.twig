@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+
+    <h1>Admin</h1>
+        <a class="btn btn-form mb-4" href="{{ path('admin_user_index') }}">Utilisateurs</a>
+        <a class="btn btn-form mb-4" href="{{ path('admin_point_index') }}">Points</a>
+        <a class="btn btn-form mb-4" href="{{ path('admin_category_index') }}">Categories</a>
+    </div>
+</div>
+
+{% endblock %}

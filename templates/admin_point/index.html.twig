@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Point index{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+    <h1>Points</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="border">Etablissement</th>
+                <th class="border">Catégorie</th>
+                <th class="border">Description</th>
+                <th class="border">Img</th>
+                <th class="border">Horaire</th>
+                <th class="border">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for point in points %}
+            <tr>
+                {# <pre>
+                    {{ dump(point) }}
+                </pre> #}
+                <td class="border">{{ point.iduser.etablissement }}</td>
+                <td class="border">{{ point.idcategory.category }}</td>
+                <td class="border">{{ point.description }}</td>
+                <td class="border"><img class="img-fluid img-crud" src="../../img_upload/{{ point.img }}" alt="{{ point.img }}"></td>
+                <td class="border">{{ point.horaire }}</td>
+                <td class="border">
+                    <a class="btn mt-2 mb-2 bg-primary text-white" href="{{ path('admin_point_edit', {'id': point.id}) }}">Modifier</a>
+                    {{ include('admin_point/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn mt-2 bg-primary text-white" href="{{ path('admin_point_new') }}">Ajout Point</a>
+</div>
+</div>
+{% endblock %}

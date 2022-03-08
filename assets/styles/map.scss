@@ -84,20 +84,27 @@
 /* css to customize Leaflet default styles  */
 .popupCustom .leaflet-popup-tip,
 .popupCustom .leaflet-popup-content-wrapper {
-    background: whitesmoke;
+    background: #505046;
     color: black;
-    width: 500px;
-    height: 500px;
+    width: 80vw;
     display: flex;
     justify-content: center;
-    align-items:center;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.leaflet-pane.leaflet-map-pane{
+display: grid;
+place-content: center;
 }
 .leaflet-popup {
-    top: -250px !important;
+    top: -225px !important;
+}
+.leaflet-popup-content{
+    width: 100% !important;
 }
 
 .modalPoint{
-    text-align: center;
+    width: 100%;
 }
 .modalPoint p {
     font-size: large;
@@ -107,5 +114,14 @@
     height: auto;
     width: auto;
     max-width: 100%;
-    max-height: 200px;
+    max-height: 250px;
+}
+.head-popup{
+    height: 100%;
+    background-color: #E84C22;
+    width: 100%;
+}
+
+.underline{
+    text-decoration: underline;
 }

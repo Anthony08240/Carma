@@ -1,8 +1,33 @@
-body{
-    background-color: #C4C4C4;
+html, body{
+    background-color: #E84C22;
+    margin: 0;
+    padding: 0;
+    height:100%;
 }
 .logo-index{
-    height: 300px;
-    width: auto;
+    height: auto;
+    width: 70%;
+    max-width: 100vh;
     border-radius: 20px;
+}
+.section-1{
+    background-color: transparent;
+    padding: 5vh;
+    margin: 0;
+    height: 75vh;
+}
+.footer-home {
+    background-color: #505046;
+    height: 25vh;
+    bottom: 0;
+}
+.logo-footer{
+    width: 20vh;
+    height: auto;
+}
+.text-footer{
+    margin-left: 2.5vh;
+    border: 2px solid white;
+    padding: 10px;
+    background-color: #E84C22;
 }

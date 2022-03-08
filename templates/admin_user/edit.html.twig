@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+        <h1>Modifier un Utilisateur</h1>
+
+        {{ include('admin_user/_form.html.twig', {'button_label': 'Valider'}) }}
+
+        <a class="btn btn-form mb-4 bg-primary" href="{{ path('admin_user_index') }}">Retour</a>
+    </div>
+</div>
+{% endblock %}

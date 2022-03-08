@@ -27,10 +27,6 @@ class HomeController extends AbstractController
         $data = $pointRepository->findAll();
         $categorys = $categoryRepository->findAll(); 
 
-        // $data = json_encode($points);
-
-        // $jsonContent = $serializer->serialize($points, 'json');
-
         $points = $serializer->serialize($data, 'json', ['groups' => 'map']);
 
         return $this->render('home/index.html.twig', [

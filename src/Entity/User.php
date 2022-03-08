@@ -71,14 +71,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $tel;
 
     /**
+     * @Groups("map")
      * @ORM\Column(type="date")
      */
     private $dnaissance;
 
     /**
-     * @ORM\OneToMany(targetEntity=Point::class, mappedBy="id_user")
+     * @ORM\OneToMany(targetEntity=Point::class, mappedBy="id_user", orphanRemoval=true)
      */
     private $points;
+
+    /**
+     * @Groups("map")
+     * @ORM\Column(type="string", length=10)
+     */
+    private $codepostal;
+
+    /**
+     * @Groups("map")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    /**
+     * @Groups("map")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $adresse;
 
     public function __construct()
     {
@@ -272,6 +291,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $point->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
 
         return $this;
     }

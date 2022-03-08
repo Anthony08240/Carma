@@ -64,10 +64,10 @@ class CrudPointController extends AbstractController
      * @Route("/{id}/edit", name="crud_point_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Point $point, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
-    {        
+    {
         $form = $this->createForm(Point1Type::class, $point);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             /** @var UploadedFile $brochureFile */
@@ -79,7 +79,7 @@ class CrudPointController extends AbstractController
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $brochureFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -101,7 +101,6 @@ class CrudPointController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('crud_point_index', [], Response::HTTP_SEE_OTHER);
-
         }
 
         return $this->renderForm('crud_point/edit.html.twig', [
@@ -115,7 +114,7 @@ class CrudPointController extends AbstractController
      */
     public function delete(Request $request, Point $point, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$point->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $point->getId(), $request->request->get('_token'))) {
             $entityManager->remove($point);
             $entityManager->flush();
         }

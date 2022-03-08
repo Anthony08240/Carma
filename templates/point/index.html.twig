@@ -10,8 +10,9 @@
         <h1 class="h1 mb-3">Ajouter un Point</h1>
 
         {{ form_start(formPoint) }}
-        {{ form_row(formPoint.categorie, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(formPoint.id_category, { attr: { 'class': 'input w-75 mx-auto' } }) }}
         {{ form_row(formPoint.description, { attr: { 'class': 'input w-75 mx-auto' } }) }}
+        {{ form_row(formPoint.horaire, { attr: { 'class': 'input w-75 mx-auto' } }) }}
         {{ form_row(formPoint.img, { attr: { 'class': 'input w-75 mx-auto' } }) }}
         <button type="submit" class="btn btn-form">Ajouter</button>
         {{ form_end(formPoint) }}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Point{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+        <h1>Crée un point</h1>
+
+        {{ include('admin_point/_form.html.twig') }}
+
+        <a class="btn btn-form mb-4 bg-primary" href="{{ path('admin_point_index') }}">Retour</a>
+    </div>
+</div>
+{% endblock %}

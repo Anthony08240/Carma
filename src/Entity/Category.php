@@ -34,7 +34,7 @@ class Category
     private $color;
 
     /**
-     * @ORM\OneToMany(targetEntity=Point::class, mappedBy="id_category")
+     * @ORM\OneToMany(targetEntity=Point::class, mappedBy="id_category", orphanRemoval=true)
      */
     private $points;
 
@@ -100,5 +100,10 @@ class Category
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->color;
     }
 }

@@ -13,14 +13,14 @@
 
         {# bouton ajout de point #}
         {% if is_granted('ROLE_USER') %}
-        <button type="button" class="btn bouton-ajout" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn bouton-ajout">
             <i class="bi bi-plus ajout-plus"></i>
         </button>
-        <ul class="dropdown-menu js-add-point-links">
+        {# <ul class="dropdown-menu js-add-point-links">
         {% for category in categorys %}
             <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': category.category }) }}">{{ category.category }}</a></li>
         {% endfor %}
-        </ul>
+        </ul> #}
         {% else %}
 
         {% endif %}
@@ -34,7 +34,7 @@
                     >Tous</a></li>
         {% for category in categorys %}
             <li><a class="dropdown-item text-white d-flex flex-row justify-content-end align-items-center js-point-color"
-                    data-is-point="{{ category.category }}"
+                    data-is-point="{{ category.color }}"
                     >{{ category.category }}<img class="marker-filtre" src="{{ asset('build/img/marker-icon-' ~ category.color ~ '.png') }}"
                         alt="marker alimentaire"></a></li>
         {% endfor %}

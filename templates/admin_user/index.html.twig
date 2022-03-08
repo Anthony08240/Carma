@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+<div class="form-body text-center d-flex justify-content-center align-items-center">
+    <div class="form p-4">
+        <h1>Utilisateurs</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Rôles</th>
+                    <th>Etablissement</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Téléphone</th>
+                    <th>Date de naissance</th>
+                    <th>Code postal</th>
+                    <th>Ville</th>
+                    <th>Adresse</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>{{ user.etablissement }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.tel }}</td>
+                    <td>{{ user.dnaissance ? user.dnaissance|date('d-m-Y') : '' }}</td>
+                    <td>{{ user.codepostal }}</td>
+                    <td>{{ user.ville }}</td>
+                    <td>{{ user.adresse }}</td>
+                    <td>
+                        <a class="btn mt-2 mb-2 bg-primary text-white" href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifer</a>
+                        {{ include('admin_user/_delete_form.html.twig') }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="14">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

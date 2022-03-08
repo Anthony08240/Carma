@@ -41,6 +41,33 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+            ->add('codepostal', TextType::class,[
+                'label' => 'Code postal',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer votre votre code postal',
+                    ]),
+                ],
+                'required' => true,
+            ])
+            ->add('ville', TextType::class,[
+                'label' => 'Ville',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer votre Ville',
+                    ]),
+                ],
+                'required' => true,
+            ])
+            ->add('adresse', TextType::class,[
+                'label' => 'adresse',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer votre Adresse',
+                    ]),
+                ],
+                'required' => true,
+            ])
             ->add('dnaissance', BirthdayType::class,[
                 'label' => 'Date de Naissance',
                 'constraints' => [

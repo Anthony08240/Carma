@@ -29,6 +29,9 @@
                         {% if is_granted('ROLE_USER') %}
                             <li><a class="dropdown-item text-white" href="{{ path('app_logout') }}">Déconnexion</a></li>
                             <li><a class="dropdown-item text-white" href="{{ path('crud_user_edit', {'id' : app.user.id }) }}">Mon Compte</a></li>
+                            {% if is_granted('ROLE_ADMIN')%}
+                                <li><a class="dropdown-item text-white" href="{{ path('admin') }}">Admin</a></li>
+                            {% endif %}
                         {% else %}
                             <li><a class="dropdown-item text-white" href="{{ path('app_register') }}">Inscription</a></li>
                             <li><a class="dropdown-item text-white" href="{{ path('app_login') }}">Connexion</a></li>

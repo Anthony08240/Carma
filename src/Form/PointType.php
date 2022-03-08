@@ -3,11 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Point;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PointType extends AbstractType
@@ -15,13 +17,17 @@ class PointType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('categorie', TextType::class,[
-                'label' => 'Categorie',
-                'disabled' => true,
-                ])
+            ->add('id_category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'category',
+                'label' => 'Categorie'
+            ])
             ->add('description', TextType::class,[
-                'label' => 'Déscription',
-                ])
+                'label' => 'Description',
+            ])
+            ->add('horaire', TextType::class,[
+                'label' => 'Horaires',
+            ])
                 ->add('img', FileType::class, [
 
                     'label' => 'Image',
