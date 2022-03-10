@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -18,20 +19,63 @@ class PointController extends AbstractController
     /**
      * @Route("/ajout-point", name="ajout-point")
      */
-    public function index(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    public function index(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger, HttpClientInterface $httpClient): Response
     {
         
         $point = new Point();
-        
-        $geoloc = $request->query->all();
-        $location = array_splice($geoloc, 0);
 
-        
-        $point->setPoint($location);
+        // api adresse datagouv
+
+        $user = $this->getUser();
+
+        $rue = $user->getAdresse();
+
+        $cp = $user->getCodepostal();
+
+        $ville = $user->getVille();
+
+       $response = $httpClient->request('GET', 'https://api-adresse.data.gouv.fr/search/?q='. $rue . '+' . $cp . '+' . $ville, [
+           'headers' => [
+               'Accept' => 'application/json',
+               'Content-Type' => 'application/json'
+           ],
+           'query' => [
+               'format' => 'json',
+               'inc' => 'geometry',
+               'limit' => '1'
+           ]
+        ]);
+
+        $data = $response->toArray();
+
+        $features = $data['features'];
+
+        $filter = $features[0];
+
+        $geometry = $filter['geometry'];
+
+        $coordinates = $geometry['coordinates'];
+
+        $latitude = $coordinates[1];
+
+        $longitude = $coordinates[0];
+
+        $arr = array(
+            'latitude' => $latitude, 
+            'longitude' => $longitude
+        );
+
+        // set user
+
+        $point->setPoint($arr);
         $point->setIdUser($this->getUser());
         
+        // create form
+
         $form = $this->createForm(PointType::class, $point);
         $form->handleRequest($request);
+        
+        // if form is valid and submited
         
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $brochureFile */

@@ -44,6 +44,16 @@ class ApiController extends AbstractController
 
         $coordinates = $geometry['coordinates'];
 
-        dd($coordinates);
+        $latitude = $coordinates[1];
+
+        $longitude = $coordinates[0];
+
+        $data = array();
+        $data["latitude"]  = $latitude;
+        $data["longitude"]  = $longitude;
+        $geolocation = json_encode( $data );
+
+
+        dd($geolocation);
     }
 }
