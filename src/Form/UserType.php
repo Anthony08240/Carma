@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -17,15 +19,33 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('etablissement')
-            ->add('name')
-            ->add('codepostal')
-            ->add('ville')
-            ->add('adresse')
-            ->add('firstname')
-            ->add('tel')
-            ->add('dnaissance', BirthdayType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'E-mail'
+            ])
+            ->add('etablissement', TextType::class, [
+                'label' => 'Etablissement'
+            ])
+            ->add('name', TextType::class, [
+                'label' => 'Nom'
+                ])
+            ->add('firstname', TextType::class, [
+                'label' => 'Prenom'
+            ])
+            ->add('codepostal', TextType::class, [
+                'label' => 'Code postal'
+            ])
+            ->add('ville', TextType::class, [
+                'label' => 'Ville'
+            ])
+            ->add('adresse', TextType::class, [
+                'label' => 'Adresse'
+            ])
+            ->add('tel', TextType::class, [
+                'label' => 'Téléphone'
+            ])
+            ->add('dnaissance', BirthdayType::class, [
+                'label' => 'Date de naissance'
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne sont pas identique',
