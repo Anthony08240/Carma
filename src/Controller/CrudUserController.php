@@ -17,16 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class CrudUserController extends AbstractController
 {
     /**
-     * @Route("/", name="crud_user_index", methods={"GET"})
-     */
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('crud_user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="crud_user_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
