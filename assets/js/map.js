@@ -304,7 +304,7 @@ console.log(entry);
                 <p><strong><span class="underline">Téléphone </span></strong>: ${entry.id_user.tel}</p>
             </div>
             <div>
-                <a href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">Itinéraire</a>
+                <a class="btn btn-light text-black" href="https://www.google.fr/maps/dir//${entry.point.latitude}, ${entry.point.longitude}/">Itinéraire</a>
             </div>
         </div>
         `;
