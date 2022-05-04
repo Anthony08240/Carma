@@ -7,24 +7,22 @@
 <div id="map" data-point="{{ points }}">
 
 
-    {# bouton sur la map #}
+    {# boutons sur la carte #}
 
     <div class="boutton w-100 d-flex justify-content-between">
 
         {# bouton ajout de point #}
+        
         {% if is_granted('ROLE_USER') %}
-        <button class="btn bouton-ajout">
-            <i class="bi bi-plus ajout-plus"></i>
-        </button>
-        {# <ul class="dropdown-menu js-add-point-links">
-        {% for category in categorys %}
-            <li><a class="dropdown-item text-whiter text-white" href="{{ path('ajout-point', {'cat': category.category }) }}">{{ category.category }}</a></li>
-        {% endfor %}
-        </ul> #}
+            <button class="btn bouton-ajout">
+                <i class="bi bi-plus ajout-plus"></i>
+            </button>
         {% else %}
 
         {% endif %}
+
         {# bouton filtre #}
+
         <button type="button" class="btn bouton-filtre" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-funnel-fill filtre-icon"></i>
         </button>

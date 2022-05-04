@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -31,12 +32,55 @@ class CrudPointController extends AbstractController
     /**
      * @Route("/{id}/edit", name="crud_point_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Point $point, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    public function edit(Request $request, Point $point, EntityManagerInterface $entityManager, SluggerInterface $slugger, HttpClientInterface $httpClient): Response
     {
         $form = $this->createForm(Point1Type::class, $point);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $user = $this->getUser();
+
+            // api adresse datagouv
+
+            $rue = $user->getAdresse();
+
+            $cp = $user->getCodepostal();
+
+            $ville = $user->getVille();
+
+            $response = $httpClient->request('GET', 'https://api-adresse.data.gouv.fr/search/?q='. $rue . '+' . $cp . '+' . $ville, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json'
+                ],
+                'query' => [
+                    'format' => 'json',
+                    'inc' => 'geometry',
+                    'limit' => '1'
+                ]
+            ]);
+
+            $data = $response->toArray();
+
+            $features = $data['features'];
+
+            $filter = $features[0];
+
+            $geometry = $filter['geometry'];
+
+            $coordinates = $geometry['coordinates'];
+
+            $latitude = $coordinates[1];
+
+            $longitude = $coordinates[0];
+
+            $arr = array(
+                'latitude' => $latitude, 
+                'longitude' => $longitude
+            );
+
+            $point->setPoint($arr);
 
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('img')->getData();

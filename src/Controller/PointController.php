@@ -65,48 +65,55 @@ class PointController extends AbstractController
             'longitude' => $longitude
         );
 
-        // set user
+        // set utilisateur
 
         $point->setPoint($arr);
         $point->setIdUser($this->getUser());
         
-        // create form
+        // creation du formulaire
 
         $form = $this->createForm(PointType::class, $point);
         $form->handleRequest($request);
         
-        // if form is valid and submited
+        // si le formulaire est soumis et validée
         
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('img')->getData();
 
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+            // cette condition est nécessaire car le champ 'brochure' n'est pas obligatoire
+            // donc le fichier doit être traité uniquement lorsqu'un fichier est téléchargé
+
             if ($brochureFile) {
                 $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
+
+                // ceci est nécessaire pour inclure en toute sécurité le nom du fichier dans l'URL
+
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
 
-                // Move the file to the directory where brochures are stored
+                // Déplacer le fichier dans le répertoire où sont stockées les fichier
+
                 try {
                     $brochureFile->move(
                         $this->getParameter('img_upload'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
+               
+                // ... gérer l'exception si quelque chose se passe pendant le téléchargement du fichier
 
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
+                }
 
                 $point->setImg($newFilename);
             }
 
+            // enregistrer les donnée dans la base de donnée
+
             $manager->persist($point);
             $manager->flush();
+
+            // redirige vers la carte
 
             return $this->redirectToRoute('home');
         }

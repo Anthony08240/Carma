@@ -17,17 +17,29 @@ class PointType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+        // ajoute un champ de type entitytype pour choisir une catégorie
+
             ->add('id_category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'category',
                 'label' => 'Categorie'
             ])
+
+        // ajoute un champ de type text pour la description
+
             ->add('description', TextType::class,[
                 'label' => 'Description',
             ])
+        
+        // ajoute un champ de type text pour les horaires
+
             ->add('horaire', TextType::class,[
                 'label' => 'Horaires',
             ])
+
+        // ajoute un champ de type file pour ajouter une photo aux format jpg,png et de taille maximal de 5mo
+        
                 ->add('img', FileType::class, [
 
                     'label' => 'Image',
@@ -44,7 +56,7 @@ class PointType extends AbstractType
                                 'image/png',
                             ],
                             'mimeTypesMessage' => 'L\'image doit etre au format jpeg ou jpg',
-                            'maxSizeMessage' => 'L\'image ne doit pas fair plus de 2mo'
+                            'maxSizeMessage' => 'L\'image ne doit pas fair plus de 5mo'
                         ])
                     ]
     

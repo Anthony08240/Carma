@@ -187,7 +187,7 @@ var geolocationIcon = L.icon({
 
 // initialisation de la map
 
-/* Les options pour afficher la France */
+/* Les options pour afficher la ville de charleville mezière */
 const mapOptions = {
     center: [49.773510, 4.721191],
     zoom: 16
@@ -266,8 +266,9 @@ if ($('#map').length != 0) {
             default:
                 break;
         }
-console.log(entry);
-        //create popup contents
+
+        //création du contenu du pop-up
+
         var customPopup = `
         <div class="modalPoint">
             <div class="head-popup">
@@ -309,10 +310,12 @@ console.log(entry);
         </div>
         `;
 
-        //specify popup options 
+        //specification des options du pop-up 
         var customOptions = {
             'className': 'popupCustom',
         }
+
+        // centrer la carte sur le marqueur selectionner
 
         function clickZoom(e) {
             map.setView(e.target.getLatLng(), map.getZoom());

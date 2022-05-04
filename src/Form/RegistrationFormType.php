@@ -20,9 +20,21 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+        // ajoute un champ de type text pour l'etablissement
+
             ->add('etablissement', TextType::class,[
-                'label' => 'Etablissement'
+                'label' => 'Etablissement',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer le nom de vôtre établissement',
+                    ]),
+                ],
+                'required' => true,
                 ])
+
+        // ajoute un champ de type text pour le nom de l'utilisateur
+
             ->add('name', TextType::class,[
                 'label' => 'Nom',
                 'constraints' => [
@@ -32,6 +44,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type text pour le prenom de l'utilisateur
+
             ->add('firstname', TextType::class,[
                 'label' => 'Prénom',
                 'constraints' => [
@@ -41,6 +56,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type text pour le code postal de l'utilisateur
+
             ->add('codepostal', TextType::class,[
                 'label' => 'Code postal',
                 'constraints' => [
@@ -50,6 +68,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type text pour la ville de l'utilisateur
+
             ->add('ville', TextType::class,[
                 'label' => 'Ville',
                 'constraints' => [
@@ -59,6 +80,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type text pour l'adresse de l'utilisateur
+
             ->add('adresse', TextType::class,[
                 'label' => 'adresse',
                 'constraints' => [
@@ -68,6 +92,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type date de naissance pour la date de naissance de l'utilisateur
+
             ->add('dnaissance', BirthdayType::class,[
                 'label' => 'Date de Naissance',
                 'constraints' => [
@@ -77,6 +104,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type email pour l'email de l'utilisateur
+
             ->add('email', EmailType::class,[
                 'constraints' => [
                     new NotBlank([
@@ -85,6 +115,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute un champ de type téléphone pour le numero de téléphone de l'utilisateur
+
             ->add('tel', TelType::class,[
                 'label' => 'Téléphone',
                 'constraints' => [
@@ -94,6 +127,9 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required' => true,
             ])
+
+        // ajoute 2 champs de type password pour le mot de passe de l'utilisateur
+
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne sont pas identique',

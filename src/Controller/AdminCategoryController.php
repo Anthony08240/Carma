@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Point;
 use App\Entity\Category;
 use App\Form\Category1Type;
 use App\Repository\CategoryRepository;
@@ -52,7 +51,7 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route("/{id}", name="admin_category_delete", methods={"POST"})
      */
-    public function delete(Request $request, Category $category, Point $point, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $entityManager->remove($category);
